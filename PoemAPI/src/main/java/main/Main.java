@@ -26,6 +26,10 @@ public class Main {
 
         app.get("/", ctx -> poemDao.getAllPoems(ctx));
 
+        app.get("/{id}", ctx -> poemDao.getPoemById(ctx));
+
+        app.delete("/{id}", ctx -> poemDao.deletePoem(ctx));
+
         app.start(7007);
     }
 }

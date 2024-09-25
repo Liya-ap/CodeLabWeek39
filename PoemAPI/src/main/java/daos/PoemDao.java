@@ -70,4 +70,78 @@ public class PoemDao {
             }
         }
     }
+
+public PoemDTO getPoemById(Context ctx) {
+        int id = Integer.parseInt(ctx.pathParam("id"));
+        try (EntityManager em = emf.createEntityManager()) {
+            Poem poem = em.find(Poem.class, id);
+
+            if (poem != null) {
+                ctx.status(200);
+                ctx.json(poem);
+                return new PoemDTO(poem);
+            } else {
+                ctx.status(404);
+                ctx.result("No poem found with id " + id);
+                throw new RuntimeException("Could not get poem with id " + id);
+            }
+        }
+}
+
+public PoemDTO deletePoem(Context ctx) {
+    try (EntityManager em = emf.createEntityManager()) {
+        em.getTransaction().begin();
+        Poem poem = em.find(Poem.class, ctx.pathParam("id"));
+        if (poem != null) {
+            em.remove(poem);
+            em.getTransaction().commit();
+            ctx.status(204);
+            return new PoemDTO(poem);
+        } else {
+            ctx.status(404);
+            ctx.result("No poem found with id " + ctx.pathParam("id"));
+            throw new RuntimeException("Could not delete poem with id " + ctx.pathParam("id"));
+        }
+    }
+}
+
+public PoemDTO getPoemById(Long id){
+        try (EntityManager em = emf.createEntityManager()) {
+            Poem poem = em.find(Poem.class, id);
+            if (poem != null) {
+                return new PoemDTO(poem);
+            } else {
+                return null;
+            }
+        }
+}
+public PoemDTO updatePoem(Context ctx) {
+     Long id = Long.parseLong(ctx.pathParam("id"));
+     PoemDTO poemDTO = getPoemById(id);
+     Poem poem = poemDTO.getPoemEntity();
+
+     if(poem != null){
+         try (EntityManager em = emf.createEntityManager()) {
+             em.getTransaction().begin();
+             Poem foundPoem = em.find(Poem.class, id);
+
+             if(poem.getTitle() != null){
+                 foundPoem.setTitle(poem.getTitle());
+             }
+             if (poem.getType() != null){
+                 foundPoem.setType(poem.getType());
+             }
+             if (poem.getPoem() != null){
+                 foundPoem.setPoem(poem.getPoem());
+             }
+             if (poem.getAuthor() != null){
+                 foundPoem.setAuthor(poem.getAuthor());
+             }
+             em.getTransaction().commit();
+             return new PoemDTO(foundPoem);
+         }
+     } else {
+         throw new RuntimeException("Poem could not be updated");
+     }
+ }
 }
