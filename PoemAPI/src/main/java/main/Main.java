@@ -2,6 +2,7 @@ package main;
 
 import config.HibernateConfig;
 import daos.PoemDao;
+import dtos.PoemDTO;
 import entities.PoemsList;
 import io.javalin.Javalin;
 import jakarta.persistence.EntityManagerFactory;
@@ -13,14 +14,17 @@ public class Main {
 
     public static void main(String[] args) {
         PoemsList list = new PoemsList();
-        list.getPoemsDTOs().forEach(System.out::println);
 
         Javalin app = Javalin.create((config) -> {
             config.router.contextPath = "/api/poems";
             config.bundledPlugins.enableRouteOverview("/routes");
         });
 
+        list.getPoemsDTOs().forEach(l -> poemDao.createPoemDTO(l));
+
         app.post("/poem", ctx -> poemDao.create(ctx));
+
+        app.get("/", ctx -> poemDao.getAllPoems(ctx));
 
         app.start(7007);
     }
