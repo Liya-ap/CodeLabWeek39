@@ -12,4 +12,9 @@ Content-Type: application/json
   "poem": "Love, love, what wilt thou with this heart of mine? Naught see I fixed or sure in thee! I do not know thee,–nor what deeds are thine: Love, love, what will thou with this heart of mine? Shall I be mute, or vows with prayers combine? Ye who are blessed in loving, tell it me: Love, love, what wilt thou with this heart of mine? Naught see I permanent or sure in thee!"
 }
 
-###
+
+### GET for a poem with specific id
+GET http://localhost:7007/api/poems/1
+
+### DELETE a poem
+DELETE http://localhost:7007/api/poems/2
