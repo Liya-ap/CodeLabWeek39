@@ -3,18 +3,17 @@ package dtos;
 import entities.Poem;
 import entities.Type;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class PoemDTO {
-    private long id;
     private String title;
     private Type type;
     private String poem;
     private String author;
 
-
     public PoemDTO(Poem poem) {
-        this.id = poem.getId();
         this.title = poem.getTitle();
         this.type = poem.getType();
         this.poem = poem.getPoem();
@@ -22,6 +21,6 @@ public class PoemDTO {
     }
 
     public Poem getPoemEntity(){
-        return new Poem(id, title, type, poem, author);
+        return new Poem(title, type, poem, author);
     }
 }
