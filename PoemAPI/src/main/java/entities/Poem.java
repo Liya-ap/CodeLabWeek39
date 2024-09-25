@@ -1,14 +1,13 @@
 package entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-
 public class Poem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,5 +21,10 @@ public class Poem {
     private String poem;
     private String author;
 
-
+    public Poem(String title, Type type, String poem, String author) {
+        this.title = title;
+        this.type = type;
+        this.poem = poem;
+        this.author = author;
+    }
 }
