@@ -1,7 +1,7 @@
-### GET request to poem server
+### GET request to localhost for all poems
 GET http://localhost:7007/api/poems
 
-###
+### POST request for creating a new poem from json
 POST http://localhost:7007/api/poems/poem
 Content-Type: application/json
 
