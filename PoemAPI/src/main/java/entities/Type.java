@@ -1,0 +1,32 @@
+package entities;
+
+public enum Type {
+    HAIKU,
+    LIMERICK,
+    SENRYU,
+    TANKA,
+    SONNET,
+    ACROSTIC,
+    ELEGY,
+    ODE,
+    GHAZAL,
+    SESTINA,
+    PANTOUM,
+    TERZA_RIMA,
+    TRIOLET,
+    RONDEL,
+    RONDEAU,
+    VILLANELLE,
+    BALLAD,
+    EPIC,
+    FREE_VERSE,
+    LYRIC,
+    NARRATIVE,
+    PROSE,
+    RHYMED_VERSE,
+    BLANK_VERSE,
+    CONCRETE,
+    FOUND,
+    LIGHT,
+    VISUAL
+}
